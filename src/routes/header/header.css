@@ -1,0 +1,8 @@
+.top {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 8vh;
+    width: 100vw;
+    border-bottom: 1px solid #efefef;
+}

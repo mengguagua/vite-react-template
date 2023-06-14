@@ -1,0 +1,20 @@
+.main {
+    display: flex;
+}
+.left {
+    width: 255px;
+    min-height: calc(100vh - 8vh - 1px);
+    border-right: 1px solid #efefef;
+    overflow: auto;
+}
+.right {
+    padding: 20px;
+}
+/* antd样式覆盖 */
+.ant-tabs-tab-remove {
+    margin-right: -12px !important;
+    margin-left: 0px !important;
+}
+.ant-tabs-nav .ant-tabs-tab {
+    padding: 2px 16px !important;
+}
