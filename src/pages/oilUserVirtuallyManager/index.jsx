@@ -1,6 +1,6 @@
-import { Select, Input, DatePicker, Button, Table } from 'antd';
+import { Select, Input, DatePicker, Button, Table, Modal, Form } from 'antd';
 import { useState } from 'react';
-import './table.css'
+import './index.css'
 
 const { RangePicker } = DatePicker;
 
@@ -25,19 +25,32 @@ const selectData = [
 // 判断左侧对象不是null 或者 undefined就去取下一个属性
 let table = () => {
   let [searchData, setSearchData] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
   let changeRangDate = (dayjs,dayString) => {
 
   };
+  let toApply = () => {
+    setIsModalOpen(true);
+  };
+  const modalCancel = () => {
+    setIsModalOpen(false);
+  };
+  const onFinish = (values) => {
+    console.log('Success:', values);
+    setIsModalOpen(false);
+  };
   let dataSource = [
     {
+      id: 1,
       name: '92汽油',
-      age: 15837376565,
-      address: '你猜你猜你猜猜猜',
+      age: 158373765652,
+      address: '你猜你猜你猜猜猜1',
     },
     {
+      id: 2,
       name: '95汽油',
-      age: 15837376565,
-      address: '你猜你猜你猜猜猜',
+      age: 158373765651,
+      address: '你猜你猜你猜猜猜2',
     },
   ];
   const columns = [
@@ -53,18 +66,23 @@ let table = () => {
     }, {
       title: '虚户开户银行',
       dataIndex: 'address2',
+      key: 'address2',
     }, {
       title: '开户日期',
       dataIndex: 'address3',
+      key: 'address3',
     }, {
       title: '账户余额',
       dataIndex: 'address4',
+      key: 'address4',
     }, {
       title: '中石化积分余额',
       dataIndex: 'address5',
+      key: 'address5',
     }, {
       title: '中石油积分余额',
       dataIndex: 'address6',
+      key: 'address6',
     },
   ];
   return (
@@ -110,10 +128,47 @@ let table = () => {
           <Button>重置</Button>
         </div>
       </div>
-
       <div>
-        <Table dataSource={dataSource} columns={columns} size="small"/>
+        <Button type="primary" onClick={toApply} style={{margin: '10px 0'}}>提现申请</Button>
+        <Table dataSource={dataSource} columns={columns}  rowKey="id" size="small"/>
       </div>
+      <Modal title="提现申请" open={isModalOpen} width={'600px'} footer={null} closable={false}>
+        <Form
+          name="basic"
+          labelCol={{ span: 8,}}
+          wrapperCol={{ span: 16,}}
+          style={{}}
+          initialValues={{}}
+          onFinish={onFinish}
+          // onFinishFailed={onFinishFailed}
+          autoComplete="off"
+        >
+          <div className={'form-row'}>
+            <Form.Item
+              label="客户名称"
+              name="username"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your username!',
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+            <Form.Item
+              label="业务类型"
+              name="username"
+            >
+              <Input />
+            </Form.Item>
+          </div>
+          <div className={'modal-footer'}>
+            <Button type="primary" htmlType="submit"> 确认 </Button>
+            <Button onClick={modalCancel}> 取消 </Button>
+          </div>
+        </Form>
+      </Modal>
     </>
   );
 };

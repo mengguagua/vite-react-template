@@ -10,6 +10,53 @@
 .right {
     padding: 20px;
 }
+/* 查询栏统一样式 */
+.search-module {
+    border-bottom: 1px solid #efefef;
+}
+.search-line {
+    display: flex;
+    flex-wrap: wrap;
+}
+.search-item {
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+}
+.search-item >span {
+    margin-right: 10px;
+    text-align: right;
+    min-width: 120px;
+}
+.select-input {
+    width: 196px;
+}
+.search-btn-line {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+.search-btn-line >button {
+    margin: 0 4px;
+}
+/* ----- */
+
+/* 弹框底部 */
+.modal-footer {
+    text-align: center;
+}
+.modal-footer >button {
+    margin: 0 4px;
+}
+/* ----- */
+
+/* 表单行 */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+/**/
+
 /* antd样式覆盖 */
 .ant-tabs-tab-remove {
     margin-right: -12px !important;

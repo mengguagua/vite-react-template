@@ -5,11 +5,11 @@ export default function ErrorPage() {
   console.error('路由错误：',error);
 
   return (
-    <div id="error-page">
+    <div id="error-page" style={{margin:"30vh 0", textAlign: "center"}}>
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       <p>
-        <i>{error.statusText || error.message}</i>
+        <i style={{color: "#e8bf6a", textDecoration: "underline"}}>{error.statusText || error.message}</i>
       </p>
     </div>
   );

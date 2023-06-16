@@ -5,6 +5,7 @@ import {createBrowserRouter} from "react-router-dom";
 // 路由的根页面和错误页面
 import Root from "./root";
 import ErrorPage from "../errorPage";
+import OilUserVirtuallyManager from '../pages/oilUserVirtuallyManager/index'
 import Table from "../pages/table/table";
 import Table2 from "../pages/table2/table2";
 
@@ -16,6 +17,9 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        path: "oilUserVirtuallyManager",
+        element: <OilUserVirtuallyManager />,
+      }, {
         path: "table",
         element: <Table />,
       }, {

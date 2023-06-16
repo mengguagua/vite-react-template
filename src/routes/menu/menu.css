@@ -1,0 +1,6 @@
+.left {
+    width: 255px;
+    min-height: calc(100vh - 8vh - 1px);
+    border-right: 1px solid #efefef;
+    overflow: auto;
+}

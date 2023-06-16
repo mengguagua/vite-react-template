@@ -17,7 +17,14 @@ dayjs.locale('zh-cn');
 ReactDOM.createRoot(document.getElementById('root')).render(
   // React.StrictMode说明：https://blog.csdn.net/yuey0809/article/details/126177570
   <React.StrictMode>
-    <ConfigProvider locale={zhCN}>
+    <ConfigProvider
+      locale={zhCN}
+      theme={{
+        token: {
+          colorPrimary: '#f09c39',
+        },
+      }}
+    >
       <RouterProvider router={router} />
     </ConfigProvider>
   </React.StrictMode>,
