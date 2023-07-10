@@ -26,8 +26,7 @@
 - 可以在main.jsx的ConfigProvider里定制主题颜色
 - jsx里引用的组件一定要首字母大写
 - antDesign form表单特殊要求：https://ant.design/components/form-cn
-    例如：注意 initialValues 不能被 setState 动态更新，你需要用 setFieldsValue 来更新。另外提供useWatch 允许你监听字段变化，同时仅当该字段变化时重新渲染
-    可参考代码：src/pages/discountConfig/userDiscount/index.jsx
+    例如：注意 initialValues 不能被 setState 动态更新，你需要用 setFieldsValue 来更新
 - 冷知识：空值合并操作符：??
   是一个逻辑操作符，当左侧的操作数为 null 或者 undefined 时，返回其右侧操作数，否则返回左侧操作数。
 - 冷知识：可选链接运算符：?. （ES2020语法）
@@ -36,8 +35,8 @@
 - 查询栏，RangePicker数据怎么清除？RangePicker增加一个key属性，在点'重制'按钮后给key设置个new Date().getTime()，这样组件就会重置。
 ### 其它约定
 > 以 `src/pages/oilUserVirtuallyManager/index.jsx` 为例子
-- 默认进页面要执行的方法，写在`return` html上面和业务代码下面。如例子的 queryTable()
-- jsx里有Modal等不用遵守html顺序的，一律写jsx标签内的最下面。如例子的<Modal>
+- 默认进页面要执行的方法，写在`return` html上面和业务代码下面。
+- jsx里有Modal等不用遵守html顺序的，一律写jsx标签内的最下面。
 - Modal弹框默认宽度640，一行两列，下拉和input默认180px
 - jsx的类html代码写文件最下方
 - 组件上方写明组件中文名字
