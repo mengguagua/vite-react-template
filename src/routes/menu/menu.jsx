@@ -1,38 +1,16 @@
 import {Menu} from "antd";
 import './menu.css';
-import {AppstoreOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 
 const menus = [
   {
-    key: 'oilUserVirtuallyManager',
-    label: '油品用户虚户管理',
-  },
-  {
-    key: 'oilUserInfoManager',
-    label: '油品用户信息管理',
-  },
-  {
-    key: 'index1',
-    icon: <AppstoreOutlined/>,
-    label: '一级菜单',
+    key: 'userCenter',
+    label: '用户中心',
     children: [
       {
-        key: 'table',
-        label: '二级菜单',
-      }, {
-        key: 'table2',
-        label: '二级菜单2',
-      }, {
-        key: 'table3',
-        label: '二级菜单3',
-        children: [
-          {
-            key: 'table3-1',
-            label: '三级菜单',
-          }
-        ],
-      }
+        key: 'oilUserVirtuallyManager',
+        label: '用户管理',
+      },
     ],
   },
 ];
@@ -51,7 +29,9 @@ let getMenuLabel = (keyPath) => {
         let menu = item.children.filter((ret) => {
           return ret.key === keyPath[0];
         });
-        result = menu[0].label;
+        if (menu[0]?.label) {
+          result = menu[0]?.label;
+        }
       }
     });
   } else if (len === 3) {
@@ -62,7 +42,9 @@ let getMenuLabel = (keyPath) => {
             let menu = ret.children.filter((resp) => {
               return resp.key === keyPath[0];
             });
-            result = menu[0].label;
+            if (menu[0]?.label) {
+              result = menu[0]?.label;
+            }
           }
         });
       }
@@ -72,10 +54,10 @@ let getMenuLabel = (keyPath) => {
   }
   return result;
 };
-let LeftMenu = ({keys, setKeys, setActiveKey, tabItems, setTabItems}) => {
+let LeftMenu = ({keys, setKeys, activeKey, setActiveKey, tabItems, setTabItems}) => {
   const navigate = useNavigate();
   const onClick = ({item, key, keyPath, domEvent}) => {
-    // console.log('item ', item);
+    console.log('item ', item);
     // console.log('key ', key);
     // console.log('keyPath ', keyPath);
     let label = getMenuLabel(keyPath);
@@ -98,10 +80,10 @@ let LeftMenu = ({keys, setKeys, setActiveKey, tabItems, setTabItems}) => {
       <Menu
         onClick={onClick}
         style={{
-          width: 254,
+          width: 255,
         }}
-        defaultSelectedKeys={['oilUserVirtuallyManager']}
-        defaultOpenKeys={['oilUserVirtuallyManager']}
+        defaultSelectedKeys={[activeKey]}
+        defaultOpenKeys={[activeKey]}
         mode="inline"
         items={menus}
       />

@@ -36,6 +36,7 @@ let Root = () => {
           <LeftMenu
             keys={keys}
             setKeys={setKeys}
+            activeKey={activeKey}
             setActiveKey={setActiveKey}
             tabItems={tabItems}
             setTabItems={setTabItems}

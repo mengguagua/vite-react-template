@@ -6,10 +6,20 @@
     min-height: calc(100vh - 8vh - 1px);
     border-right: 1px solid #efefef;
     overflow: auto;
+    -ms-overflow-style: none; /* IE和Edge */
+    scrollbar-width: none; /* Firefox */
 }
+
+.left::-webkit-scrollbar {
+    display: none; /* Chrome和Safari */
+}
+
+
 .right {
     padding: 20px;
+    width: calc(100vw - 256px);
 }
+
 /* 查询栏统一样式 */
 .search-module {
     border-bottom: 1px solid #efefef;
@@ -43,6 +53,7 @@
 
 /* 弹框底部 */
 .modal-footer {
+    margin-top: 12px;
     text-align: center;
 }
 .modal-footer >button {
@@ -50,10 +61,25 @@
 }
 /* ----- */
 
-/* 表单行 */
+/* 表单 */
 .form-row {
     display: flex;
     justify-content: space-between;
+}
+.form-title {
+    padding: 4px 0 8px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+.form-title::before {
+    margin-right: 4px;
+    content: "";
+    width: 4px;
+    height: 16px;
+    border-radius: 2px;
+    background-color: #0050b3;
 }
 /**/
 
@@ -64,4 +90,7 @@
 }
 .ant-tabs-nav .ant-tabs-tab {
     padding: 2px 16px !important;
+}
+.ant-form-item .ant-form-item-label >label {
+    min-width: 90px;
 }
