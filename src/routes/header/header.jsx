@@ -2,7 +2,7 @@ import './header.css'
 let Header = () => {
   return (
     <div className={'top'}>
-      <div>示例业务管理系统</div>
+      <div style={{marginLeft: '20px'}}>示例业务管理系统</div>
     </div>
   );
 };
