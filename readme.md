@@ -15,27 +15,34 @@ http://localhost:8888/ath-oil/
 - pages文件夹：业务组件
 ### 添加页面操作顺序
 1、pages里新建带业务名称的文件夹A，在文件夹内新建index.jsx
+
 2、src/routes/router.jsx 文件内引入index.jsx，且声明路由
+
 3、src/routes/menu/menu.jsx 文件内声明新页面的菜单(若调用接口，则在数据库内添加)
+
 ### 添加redux全局状态顺序
 1、在src/store下新增一个xxxSlice.js的状态切片(可参考loadingSlice) // 命名规则xxx为state状态名字
+
 2、在src/store/store.js添加reducer
+
 3、获取state：可参考src/routes/root.jsx Spin组件
-    ```jsx
+
+```jsx
     // 导入hook
     import { useSelector } from 'react-redux'
     // 组件内部获取全局加载状态
     let loadingType = useSelector(state => state.loading.value)
-    ```
+```
 4、触发action修改state
-    ```
-    // 导入触发hook
+
+```jsx
+		// 导入触发hook
     import { useDispatch } from 'react-redux'
     // 导入redux切片的reducers
     import { openLoading, closeLoading } from '../store/loadingSlice'
     // 业务逻辑里触发action
     dispatch(openLoading())
-    ```
+```
 ### 其它注意
 - useState() 属于异步函数, setState()后值不会立刻变化。
 - key和path要一致且唯一。
