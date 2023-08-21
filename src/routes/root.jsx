@@ -6,8 +6,14 @@ import Header from './header/header';
 import LeftMenu from './menu/menu';
 // 编程式跳转路由
 import { useNavigate } from "react-router-dom";
+// 加载框
+import { Spin } from 'antd'
+import { useSelector } from 'react-redux'
 
 let Root = () => {
+  // 获取全局加载状态
+  let loadingType = useSelector(state => state.loading.value)
+
   const navigate = useNavigate();
   // tab标签和菜单的联动操作
   const [keys, setKeys] = useState('');
@@ -19,8 +25,8 @@ let Root = () => {
       const tabs = tabItems.filter((tab) => tab.key !== targetKey);
       setTabItems(tabs);
       if (keys.length) {
-        navigate(keys.slice(-1)[0]);
-        setActiveKey(keys.slice(-1)[0]);
+        navigate(tabs.slice(-1)[0]?.key);
+        setActiveKey(tabs.slice(-1)[0]?.key);
       }
     }
   };
@@ -42,20 +48,22 @@ let Root = () => {
             setTabItems={setTabItems}
           />
         </div>
-        <div className={'right'}>
-          { keys.length ?
-          <Tabs
-            hideAdd
-            size="small"
-            onChange={onChange}
-            onEdit={onEdit}
-            activeKey={activeKey}
-            type="editable-card"
-            items={tabItems}
-          /> : <div></div>
-          }
-          <Outlet />
-        </div>
+        <Spin style={{zIndex: '2000', maxHeight: '100%'}} spinning={loadingType}>
+          <div className={'right'}>
+            { keys.length ?
+            <Tabs
+              hideAdd
+              size="small"
+              onChange={onChange}
+              onEdit={onEdit}
+              activeKey={activeKey}
+              type="editable-card"
+              items={tabItems}
+            /> : <div></div>
+            }
+            <Outlet />
+          </div>
+        </Spin>
       </div>
     </div>
   );

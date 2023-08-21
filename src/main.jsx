@@ -12,6 +12,9 @@ import 'antd/dist/reset.css';
 import './index.css'
 // 路由配置文件
 import router from './routes/router';
+// 设置redux store
+import { Provider } from 'react-redux'
+import store from './store/store'
 
 dayjs.locale('zh-cn');
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -25,7 +28,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         },
       }}
     >
-      <RouterProvider router={router} />
+      <Provider store={store}>
+        <RouterProvider router={router} />
+      </Provider>
     </ConfigProvider>
   </React.StrictMode>,
 )

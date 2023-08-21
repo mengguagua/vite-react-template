@@ -17,13 +17,13 @@ export default defineConfig({
   },
   base: './', // 资源定位更改为相对路径
   server: {
-    port: 7070,
+    port: 8888,
     host: '0.0.0.0',
     proxy: {
-      "/api-prefix": {
-        target: "http://192.168.85.40:8082/", // 开发/测试地址
+      "/ath-oil-web": {
+        target: "http://192.168.85.40:8082/", // 后端ip
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api-prefix/, "api-prefix"),
+        rewrite: (path) => path.replace(/^\/ath-oil-web/, "ath-oil-web"),
       },
     },
   },

@@ -1,6 +1,7 @@
-.top {
+.header-top {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 8vh;
     width: 100vw;
     border-bottom: 1px solid #efefef;
@@ -8,4 +9,13 @@
     color: #fff;
     font-weight: 500;
     font-size: 30px;
+}
+.header-right {
+    margin-right: 20px;
+    width: 200px;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: right;
+    text-decoration: underline;
+    cursor: pointer;
 }

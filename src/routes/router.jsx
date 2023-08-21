@@ -5,17 +5,17 @@ import {createBrowserRouter} from 'react-router-dom';
 // 路由的根页面和错误页面
 import Root from './root';
 import ErrorPage from "../errorPage";
-import OilUserVirtuallyManager from '../pages/oilUserVirtuallyManager/index'
+import OilUserInfoManager from '../pages/oilUserInfoManager/index'
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/ath-oil/",
     element: <Root/>,
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "oilUserVirtuallyManager",
-        element: <OilUserVirtuallyManager />,
+        path: "oilUserInfoManager",
+        element: <OilUserInfoManager />,
       },
     ],
   },

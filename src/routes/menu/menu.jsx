@@ -1,19 +1,28 @@
 import {Menu} from "antd";
 import './menu.css';
 import {useNavigate} from "react-router-dom";
+import {menuList} from '../../service/interface';
 
 const menus = [
   {
-    key: 'userCenter',
-    label: '用户中心',
+    key: 'oilUserInfoManager',
+    label: '用户信息管理',
+  },
+  {
+    key: 'isCard',
+    label: '一级菜单',
     children: [
       {
-        key: 'oilUserVirtuallyManager',
-        label: '用户管理',
+        key: 'mainCard',
+        label: '二级菜单',
+      }, {
+        key: 'subCard',
+        label: '二级菜单',
       },
     ],
   },
 ];
+
 // 三级菜单以及之内
 let getMenuLabel = (keyPath) => {
   let len = keyPath.length;
@@ -54,7 +63,12 @@ let getMenuLabel = (keyPath) => {
   }
   return result;
 };
+
 let LeftMenu = ({keys, setKeys, activeKey, setActiveKey, tabItems, setTabItems}) => {
+  // 使用前端的静态菜单就注释下面两行
+  // let [menus, setMenus] = useState([]);
+  // useEffect(() => { queryMenu(); }, []);
+
   const navigate = useNavigate();
   const onClick = ({item, key, keyPath, domEvent}) => {
     console.log('item ', item);
@@ -74,6 +88,25 @@ let LeftMenu = ({keys, setKeys, activeKey, setActiveKey, tabItems, setTabItems})
     }
     setActiveKey(key);
     navigate(key);
+  };
+
+  let deleteEmptyChildren = (arr) => {
+    return arr.map(item => {
+      if (item.children.length > 0) {
+        deleteEmptyChildren(item.children)
+      } else {
+        delete item.children
+      }
+      return item;
+    })
+  }
+  // 默认调用接口
+  let queryMenu = () => {
+    menuList().then((resp) => {
+      let menu = deleteEmptyChildren(resp?.data);
+      // 使用前端的静态菜单就注释下面一行
+      // setMenus(menu)
+    });
   };
   return (
     <div className={'left'}>
