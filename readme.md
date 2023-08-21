@@ -58,7 +58,6 @@ http://localhost:8888/ath-oil/
 - antd的日期使用dayjs 所以日期反显要转化一下。 import * as dayjs from 'dayjs'; modalForm.setFieldsValue({...record, scoreTime: dayjs(record.scoreTime || new Date())});
 - 假如有页面加载慢，可以使用退路方案（fallback），类似图片的预加载框效果。参考：https://zh-hans.react.dev/reference/react/Suspense
 ### 其它约定
-> 以 `src/pages/oilUserVirtuallyManager/index.jsx` 为例子
 - 默认进页面要执行的方法，写在`return` html上面和业务代码下面。如例子的 queryTable()
 - jsx里有Modal等不用遵守html顺序的，一律写jsx标签内的最下面。如例子的<Modal>
 - Modal弹框默认宽度640，一行两列，下拉和input默认180px
