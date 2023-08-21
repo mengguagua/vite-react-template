@@ -21,7 +21,7 @@ export default defineConfig({
     host: '0.0.0.0',
     proxy: {
       "/ath-oil-web": {
-        target: "http://192.168.85.40:8082/", // 后端ip
+        target: "http://192.168.0.1:8080/", // 后端ip
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/ath-oil-web/, "ath-oil-web"),
       },
