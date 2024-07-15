@@ -1,5 +1,5 @@
 {
-  "name": "ath-front-web",
+  "name": "gcc-front-web",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -11,16 +11,19 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
-    "antd": "^5.6.1",
+    "antd": "^5.12.8",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
+    "encryptlong": "^3.1.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.12.0",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "vite-plugin-require": "^1.1.11"
   },
   "devDependencies": {
+    "@iconify/react": "^4.1.1",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",
@@ -28,6 +31,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
-    "vite": "^4.3.9"
+    "vite": "^4.3.9",
+    "vite-plugin-commonjs": "^0.10.1"
   }
 }

@@ -1,9 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react-swc'
+import vitePluginRequire from "vite-plugin-require";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [
+    react(),
+    // 让vite支持require语法
+    vitePluginRequire.default()
+  ],
   minify: true, // 是否压缩代码
   build: {
     rollupOptions: {
@@ -15,13 +20,14 @@ export default defineConfig({
       }
     }
   },
-  base: './', // 资源定位更改为相对路径
+  base: './', // 资源定位可更改为相对路径，如 ./
   server: {
     port: 8888,
     host: '0.0.0.0',
     proxy: {
-      "/ath-oil-web": {
-        target: "http://192.168.0.1:8080/", // 后端ip
+      "/ath-oil-web/": {
+        target: "http://192.168.xx.xx:8082/",
+        secure: false,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/ath-oil-web/, "ath-oil-web"),
       },

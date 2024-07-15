@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import {getOilCompanyName} from "../service/interface";
-// 自定义hook，重复查询的逻辑可以提炼成hook
+
 let useOilCompany = (virtualType = '') => {
   let [oilCompanyOption, setOilCompanyOption] = useState([]);
   useEffect(() => { getOilCompanyNameOption(); }, []);

@@ -1,48 +1,59 @@
 ## 管理后台-vite-react
-### 运行后，浏览器打开，去要换前缀去router.jsx
-http://localhost:8888/ath-oil/
 ### 技术工具
 - react-router-dom：https://reactrouter.com/en/main/start/tutorial
 - ant-design：https://ant.design/components/table-cn#components-table-demo-basic
 ### 目录说明
-- index.html: 单页面文件，引入main.jsx
-- main.jsx: 程序入口，引入了antd和router配置
-- router.jsx: 路由配置文件
-- root.jsx: 布局文件，处理头部，菜单，tab页签，右侧内容
-- root.css 布局样式，公共样式内容。
+- public // 静态资源，如供下载的文件模板
+- src // 主目录
+  - hook // 自定义hook，抽象公共的代码
+  - page // 业务页面
+    - Index.jsx // 页面jsx代码
+    - xxx.css // css文件，以业务文件夹命名，样式格式：业务文件夹名-样式名称
+  - routes
+    - header // 头部
+    - menu // 左侧菜单
+    - root // 总体布局
+    - router // 路由配置
+  - tools // 工具方法
+  - service
+    - api // 报错拦截、鉴权、文件流处理、防抖等全局处理逻辑
+    - interface // 接口定义
+  - store // redux全局state切片文件
+    - store.js // 注册文件
+    - xxxSlice.js // 切片对象逻辑
+  - errorPage.jsx // 报错页面
+  - index.css // 全局样式
+  - main.jsx // 入口文件，导入各种配置如：路由、UI中文配置、redux、主题颜色
+- index.html // 单页面入口
+- package.json // 依赖配置
+- readme.md // 项目注意事项
+- vite.config.js // vite配置文件
 > 其它页面开发，如查询栏等，公共内容，不提取组件，通过公共样式实现样式统一
-- errorPage：router报错时候的跳转页面
-- pages文件夹：业务组件
+
 ### 添加页面操作顺序
 1、pages里新建带业务名称的文件夹A，在文件夹内新建index.jsx
-
 2、src/routes/router.jsx 文件内引入index.jsx，且声明路由
-
 3、src/routes/menu/menu.jsx 文件内声明新页面的菜单(若调用接口，则在数据库内添加)
-
 ### 添加redux全局状态顺序
 1、在src/store下新增一个xxxSlice.js的状态切片(可参考loadingSlice) // 命名规则xxx为state状态名字
-
 2、在src/store/store.js添加reducer
-
 3、获取state：可参考src/routes/root.jsx Spin组件
-
-```jsx
+    ```jsx
     // 导入hook
     import { useSelector } from 'react-redux'
     // 组件内部获取全局加载状态
     let loadingType = useSelector(state => state.loading.value)
-```
+    ```
 4、触发action修改state
-
-```jsx
-		// 导入触发hook
+    ```jsx
+    // 导入触发hook
     import { useDispatch } from 'react-redux'
     // 导入redux切片的reducers
     import { openLoading, closeLoading } from '../store/loadingSlice'
     // 业务逻辑里触发action
+    const dispatch = useDispatch()
     dispatch(openLoading())
-```
+    ```
 ### 其它注意
 - useState() 属于异步函数, setState()后值不会立刻变化。
 - key和path要一致且唯一。
@@ -65,6 +76,7 @@ http://localhost:8888/ath-oil/
 - antd的日期使用dayjs 所以日期反显要转化一下。 import * as dayjs from 'dayjs'; modalForm.setFieldsValue({...record, scoreTime: dayjs(record.scoreTime || new Date())});
 - 假如有页面加载慢，可以使用退路方案（fallback），类似图片的预加载框效果。参考：https://zh-hans.react.dev/reference/react/Suspense
 ### 其它约定
+> 以 `src/pages/oilUserVirtuallyManager/index.jsx` 为例子
 - 默认进页面要执行的方法，写在`return` html上面和业务代码下面。如例子的 queryTable()
 - jsx里有Modal等不用遵守html顺序的，一律写jsx标签内的最下面。如例子的<Modal>
 - Modal弹框默认宽度640，一行两列，下拉和input默认180px
@@ -97,3 +109,4 @@ http://localhost:8888/ath-oil/
 - 这是 antd Table 组件需要给一个rowKey，作为每一行的唯一标识。取接口返回的一个唯一值就行，一般是id
 2、加了上下文之后，测试环境访问次级路由出现404
 - nginx修改配置: try_files $uri $uri/ /上下文地址/index.html;
+3、升级时候菜单记得切换成调用接口，不要取本地

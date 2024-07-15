@@ -15,7 +15,6 @@ axios.interceptors.request.use(
     }
     config.headers = {
       'X-Requested-With': 'XMLHttpRequest',
-      'redirectUrl': location.href
     };
     return config;
   },
@@ -32,8 +31,8 @@ axios.interceptors.response.use(
     store.dispatch(closeLoading());
     // 没登录，跳转登录
     if (res.headers['permission-status'] && Number(res.headers['permission-status']) == 1) {
-      // window.location.href = res.headers['redirect-url'];
-      // return Promise.reject(res.data);
+      window.location.href = res.headers['redirect-url'];
+      return Promise.reject(res.data);
     }
     // 没接口权限
     if (res.headers['permission-status'] && Number(res.headers['permission-status']) == 2) {
@@ -41,7 +40,8 @@ axios.interceptors.response.use(
       return Promise.reject(res.data);
     }
     // 文件下载统一处理
-    if (res.config.method == 'get' && res.config.params.isBlobRequest) {
+    if (res.config.params && res.config.params.isBlobRequest) {
+    // if (res.config.method == 'get' && res.config.params.isBlobRequest) {
       if (res.data.type === 'application/json') {
         // 如果返回的是json格式，说明导出接口报错，将blob数据转为json数据，读取并提示报错信息
         let reader = new FileReader()

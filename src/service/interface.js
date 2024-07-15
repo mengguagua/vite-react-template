@@ -1,10 +1,21 @@
 // 业务接口都写在interface这个文件内
 import axios from './api';
 
-// 系统公共接口
 // 查询菜单
 export function menuList(req) {
   return axios.get(`/ath-oil-web/uct/menuList`, {params: req});
+}
+// 查询菜单
+export function changePwd(req) {
+  return axios.post(`/ath-oil-web/uct/changePwd`, req);
+}
+// 按钮权限
+export function buttonList(req) {
+  return axios.get(`/ath-oil-web/uct/buttonList`, {params: req});
+}
+// 查询用户信息
+export function getUserInfo(req) {
+  return axios.get(`/ath-oil-web/uct/getUserInfo`, {params: req});
 }
 // 登出
 export function uctLogout(req) {
@@ -14,45 +25,67 @@ export function uctLogout(req) {
 export function exportFiles(url, req) {
   return axios.get(url, {params: {...req, isBlobRequest: true}, responseType: 'blob'});
 }
-// 查询图片前缀
-export function oilFileInfoUrlPrefix(req) {
-  return axios.get(`/ath-oil-web/oilFileInfo/urlPrefix`, {params: req});
+// 查询操作日志
+export function oilOperationLogQueryPages(req) {
+  return axios.post(`/ath-oil-web/oilOperationLog/queryPages`, req);
 }
-// 上传文件
-export function oilFileInfoUpload(req) {
-  return axios.post(`/ath-oil-web/oilFileInfo/upload`, req, {headers: {'Content-Type': 'multipart/form-data'}});
+// 查询油品类型
+export function selectGetOilCodeList(req) {
+  return axios.post(`/ath-oil-web/auto/select/getOilCodeList`, req);
 }
 
-// 用户信息管理
-// 查询公司下拉
+// 下拉查询
+export function oilUserCompanyInfoList(req) {
+  return axios.post(`/ath-oil-web/oilUserCompanyInfo/list`, req);
+}
+// 查询石油公司
 export function getOilCompanyName(req) {
   return axios.get(`/ath-oil-web/oilCompanyCardInfo/getOilCompanyName`, {params: req});
 }
+// 司机副卡管理
 // 查询
-export function oilUserPageList(req) {
-  return axios.post(`/ath-oil-web/oilUserCompanyInfo/page`, req);
+export function oilCardInfoQueryPages(req) {
+  return axios.post(`/ath-oil-web/oilCardInfo/queryPages`, req);
 }
-// 新增/修改
-export function oilUserCompanyInfoAddEdit(req) {
-  return axios.post(`/ath-oil-web/oilUserCompanyInfo/customerInput`, req);
+// 新增前查询信息，判断是否"开启"状态
+export function cardSearch(req) {
+  return axios.get(`/ath-oil-web/oilCardInfo/cardSearch`, {params: req});
 }
-// 新增主账户
-export function xmCustomerInput(req) {
-  return axios.post(`/ath-oil-web/oilUserCompanyInfo/xmCustomerInput`, req);
+// 新增
+export function subcardGeneration(req) {
+  return axios.post(`/ath-oil-web/oilCardInfo/subcardGeneration`, req);
 }
-// 查询详情
-export function getUserCompanyById(req) {
-  return axios.get(`/ath-oil-web/oilUserCompanyInfo/getUserCompanyById`, {params: req});
+// 修改
+export function updateCardGeneration(req) {
+  return axios.post(`/ath-oil-web/oilCardInfo/updateCardGeneration`, req);
 }
-// 指派人员
-export function assignedPersonnel(req) {
-  return axios.get(`/ath-oil-web/oilUserCompanyInfo/assignedPersonnel`, {params: req});
+// 实体卡解绑
+export function oilCardInfoUnbind(req) {
+  return axios.get(`/ath-oil-web/oilCardInfo/unbind`, {params: req});
 }
-// 获取商务经理
-export function getSalesStaff(req) {
-  return axios.get(`/ath-oil-web/oilUserCompanyInfo/getSalesStaff`, {params: req});
+// 修改启用/禁用
+export function modifyCardRelation(req) {
+  return axios.post(`/ath-oil-web/oilCardInfo/modifyCardRelation`, req);
 }
-// 模糊查询
-export function oilServiceConfigPage(req) {
-  return axios.post(`/ath-oil-web/oilServiceConfig/page`, req);
+// 导入
+export function oilCardInfoImport(req) {
+  return axios.post(`/ath-oil-web/oilCardInfo/import`, req, {headers: {'Content-Type': 'multipart/form-data'}});
 }
+// 关联车队
+export function fleetAssociation(req) {
+  return axios.get(`/ath-oil-web/oilCardInfo/fleetAssociation`, {params: req});
+}
+// 解除关联车队
+export function fleetDisassociation(req) {
+  return axios.get(`/ath-oil-web/oilCardInfo/fleetDisassociation`, {params: req});
+}
+// 根据石油公司名称获取副卡卡号
+export function getViceNoByOilCompanyName(req) {
+  return axios.get(`/ath-oil-web/oilCompanyCardInfo/getViceNoByOilCompanyName`, {params: req});
+}
+// 企业子车队
+// 查询
+export function oilUserFleetInfoPage(req) {
+  return axios.post(`/ath-oil-web/oilUserFleetInfo/page`, req);
+}
+

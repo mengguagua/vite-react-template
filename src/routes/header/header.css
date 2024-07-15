@@ -3,7 +3,7 @@
     align-items: center;
     justify-content: space-between;
     height: 8vh;
-    width: 100vw;
+    /*width: 100vw;*/
     border-bottom: 1px solid #efefef;
     background-color: #0050b3;
     color: #fff;
@@ -11,11 +11,22 @@
     font-size: 30px;
 }
 .header-right {
+    display: flex;
     margin-right: 20px;
-    width: 200px;
+    width: 300px;
     font-size: 14px;
     font-weight: 400;
     text-align: right;
+}
+.header-right >:nth-child(1) {
+    margin-right: 12px;
+    text-decoration: none !important;
+}
+.header-right >:nth-child(2) {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.header-right >:nth-child(3) {
     text-decoration: underline;
     cursor: pointer;
 }

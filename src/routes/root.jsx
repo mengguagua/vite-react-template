@@ -16,6 +16,7 @@ let Root = () => {
 
   const navigate = useNavigate();
   // tab标签和菜单的联动操作
+  const [isOpen, setIsOpen] = useState(true);
   const [keys, setKeys] = useState('');
   const [activeKey, setActiveKey] = useState('');
   const [tabItems, setTabItems] = useState([]);
@@ -33,12 +34,18 @@ let Root = () => {
   const onChange = (key) => {
     setActiveKey(key);
     navigate(key);
+    console.log('activeKey', activeKey);
+  };
+  let openCloseMenu = () => {
+    setIsOpen(!isOpen);
   };
   return (
     <div>
       <Header/>
       <div className={'main'}>
-        <div className={'left'}>
+        <div className={'icon-park-solid--exchange-four'} style={isOpen ? {left: '238px'} : {left: '4px'}} onClick={openCloseMenu}/>
+        {/*<div className={'left'}>*/}
+        <div className={isOpen ? 'root-left' : 'close-root-left'}>
           <LeftMenu
             keys={keys}
             setKeys={setKeys}
@@ -49,8 +56,8 @@ let Root = () => {
           />
         </div>
         <Spin style={{zIndex: '2000', maxHeight: '100%'}} spinning={loadingType}>
-          <div className={'right'}>
-            { keys.length ?
+          <div className={isOpen ? 'right' : 'close-right'}>
+            { keys.length && activeKey != 'financialReconciliation' ?
             <Tabs
               hideAdd
               size="small"
