@@ -1,5 +1,5 @@
 import { Tabs } from 'antd';
-import { useState } from 'react';
+import {useRef, useState} from 'react';
 import { Outlet } from "react-router-dom";
 import './root.css';
 import Header from './header/header';
@@ -18,8 +18,10 @@ let Root = () => {
   // tab标签和菜单的联动操作
   const [isOpen, setIsOpen] = useState(true);
   const [keys, setKeys] = useState('');
-  const [activeKey, setActiveKey] = useState('');
+  const [tabActiveKey, setTabActiveKey] = useState('');
   const [tabItems, setTabItems] = useState([]);
+  let menuActiveKey = useRef('');
+
   const onEdit = (targetKey, action) => {
     if (action === 'remove') {
       setKeys(keys.filter((key) => key !== targetKey));
@@ -27,14 +29,14 @@ let Root = () => {
       setTabItems(tabs);
       if (keys.length) {
         navigate(tabs.slice(-1)[0]?.key);
-        setActiveKey(tabs.slice(-1)[0]?.key);
+        menuActiveKey.current = tabs.slice(-1)[0]?.key;
       }
     }
   };
   const onChange = (key) => {
-    setActiveKey(key);
+    menuActiveKey.current = key;
     navigate(key);
-    console.log('activeKey', activeKey);
+    console.log('menuActiveKey', menuActiveKey.current);
   };
   let openCloseMenu = () => {
     setIsOpen(!isOpen);
@@ -49,24 +51,24 @@ let Root = () => {
           <LeftMenu
             keys={keys}
             setKeys={setKeys}
-            activeKey={activeKey}
-            setActiveKey={setActiveKey}
+            setTabActiveKey={setTabActiveKey}
             tabItems={tabItems}
             setTabItems={setTabItems}
           />
         </div>
         <Spin style={{zIndex: '2000', maxHeight: '100%'}} spinning={loadingType}>
           <div className={isOpen ? 'right' : 'close-right'}>
-            { keys.length && activeKey != 'financialReconciliation' ?
-            <Tabs
-              hideAdd
-              size="small"
-              onChange={onChange}
-              onEdit={onEdit}
-              activeKey={activeKey}
-              type="editable-card"
-              items={tabItems}
-            /> : <div></div>
+            {/* financialReconciliation: 财务对账不展示tab */}
+            { keys.length && menuActiveKey.current != 'financialReconciliation' ?
+              <Tabs
+                hideAdd
+                size="small"
+                onChange={onChange}
+                onEdit={onEdit}
+                activeKey={tabActiveKey}
+                type="editable-card"
+                items={tabItems}
+              /> : <div></div>
             }
             <Outlet />
           </div>

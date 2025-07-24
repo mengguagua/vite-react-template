@@ -11,7 +11,7 @@ import DriverCardDetail from '../pages/driverCard/detail';
 
 const router = createBrowserRouter([
   {
-    path: "/ath-oil-web-front/",
+    path: "/",
     element: <Root/>,
     errorElement: <ErrorPage />,
     children: [
@@ -21,6 +21,9 @@ const router = createBrowserRouter([
       }, {
         path: "driverCardDetail",
         element: <DriverCardDetail />,
+      }, {
+        path: "driverCard2",
+        element: <DriverCard />,
       },
     ],
   },

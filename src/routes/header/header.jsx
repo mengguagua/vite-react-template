@@ -16,7 +16,9 @@ let Header = () => {
   const [passwordData, setPasswordData] = useState({});
   const [errorText, setErrorText] = useState('');
   const [user, setUser] = useState({});
-  useEffect(() => { toGetUserInfo();  dispatch(fetchAuthBtn()); }, []); // fetchAuthBtn获取按钮权限集合
+  useEffect(() => {
+    // toGetUserInfo();
+    dispatch(fetchAuthBtn()); }, []); // fetchAuthBtn获取按钮权限集合
 
   let logout = () => {
     uctLogout().then((resp) => {

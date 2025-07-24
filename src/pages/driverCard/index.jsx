@@ -10,10 +10,9 @@ import {
   oilUserCompanyInfoList,
   getViceNoByOilCompanyName, oilCardInfoUnbind,
   exportFiles, modifyCardRelation, cardSearch,
-  updateCardGeneration, buttonList, oilUserFleetInfoPage,
+  updateCardGeneration, oilUserFleetInfoPage,
   fleetAssociation, fleetDisassociation
 } from '../../service/interface';
-import useOilCompany from "../../hook/useOilCompany";
 import {useSelector} from "react-redux";
 const { confirm } = Modal;
 
@@ -65,10 +64,7 @@ let table = () => {
   let [apiOptionData, setApiOptionData] = useState([]);
   let [teamApiOptionData, setTeamApiOptionData] = useState([]);
   let [oilCardNoOption, setOilCardNoOption] = useState([]);
-  let {oilCompanyOption} = useOilCompany(); // 自定义hook，查询关联石油公司下拉 1实体卡 2电子油卡
-  let oilEntity = useOilCompany(1); // 自定义hook，查询关联石油公司下拉 1实体卡 2电子油卡
-  let oilEntityCompanyOption = oilEntity?.oilCompanyOption;
-  useEffect(() => { queryTable(); }, []);
+  // useEffect(() => { queryTable(); }, []);
   // 静态数据
   const columns = [
     {
@@ -477,7 +473,7 @@ let table = () => {
               value={searchData.oilCompanyName}
               placeholder="请选择"
               onChange={(e) => {setSearchData({...searchData, oilCompanyName: e})}}
-              options={oilCompanyOption}
+              options={[]}
             />
           </div>
           <div className={'search-item'}>
@@ -662,7 +658,7 @@ let table = () => {
                   placeholder="请选择"
                   style={{width: '180px'}}
                   onChange={handleChangeCompany}
-                  options={oilEntityCompanyOption}
+                  options={[]}
                 />
               </Form.Item>
               <Form.Item label="关联卡号"
